@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In – NutriTrack</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="index.html" class="auth-logo">
+          <i class="fa-solid fa-leaf"></i>
+          <span>NutriTrack</span>
+        </a>
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to access your nutrition dashboard and daily progress.</p>
+      </div>
+
+      <!-- Quick Demo Credentials Box -->
+      <div class="demo-badge-box">
+        <span><i class="fa-solid fa-lightbulb" style="color: var(--warning); margin-right: 0.35rem;"></i> Need a test account?</span>
+        <button type="button" class="demo-fill-btn" id="demo-fill-btn">Auto-fill Demo</button>
+      </div>
+
+      <!-- Alert Box -->
+      <div id="auth-alert" class="auth-alert"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+            <button type="button" class="password-toggle-btn" data-target="password" title="Toggle password visibility">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-helper-row">
+          <label class="remember-label">
+            <input type="checkbox" id="remember-me">
+            <span>Remember login</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;" id="login-submit-btn">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Don't have an account? <a href="register.html">Sign up now</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

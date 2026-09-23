@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today's Meals – NutriTrack</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <i class="fa-solid fa-leaf"></i>
+          <span>NutriTrack</span>
+        </a>
+        <button class="sidebar-close-btn" aria-label="Close Sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link" id="nav-dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="add-food.html" class="sidebar-link" id="nav-add-food">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span>Add Food</span>
+        </a>
+        <a href="today.html" class="sidebar-link" id="nav-today">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Today's Meals</span>
+        </a>
+        <a href="history.html" class="sidebar-link" id="nav-history">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>History</span>
+        </a>
+
+        <div class="nav-category">Wellness & Targets</div>
+        <a href="goals.html" class="sidebar-link" id="nav-goals">
+          <i class="fa-solid fa-bullseye"></i>
+          <span>Nutrition Goals</span>
+        </a>
+        <a href="water.html" class="sidebar-link" id="nav-water">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Water Tracker</span>
+        </a>
+        <a href="profile.html" class="sidebar-link" id="nav-profile">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Profile & BMI</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">U</div>
+          <div class="user-meta">
+            <div class="user-meta-name user-name-display">Loading...</div>
+            <div class="user-meta-email user-email-display">user@example.com</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-toggle" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-title">Today's Meals</div>
+        </div>
+        <div class="topbar-right">
+          <a href="add-food.html" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-plus"></i> Add New Meal
+          </a>
+        </div>
+      </header>
+
+      <main class="content-container">
+        <div class="page-header">
+          <div class="page-greeting">
+            <h1>Today's Consumption Log</h1>
+            <p>Review, edit, or delete items you have consumed today.</p>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="today-empty-state" class="card empty-state" style="display: none;">
+          <div class="empty-state-icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h3 class="empty-state-title">No food records found for today</h3>
+          <p class="empty-state-desc">You haven't logged any meals yet today. Click below to add breakfast, lunch, dinner, or snacks.</p>
+          <a href="add-food.html" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Add Food Now
+          </a>
+        </div>
+
+        <!-- Table & Summary Wrapper -->
+        <div id="today-table-wrapper" style="display: none;">
+          <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 2rem;">
+            <div class="table-responsive">
+              <table class="custom-table" id="today-meals-table">
+                <thead>
+                  <tr>
+                    <th>Food</th>
+                    <th>Meal</th>
+                    <th>Quantity</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbs</th>
+                    <th>Fat</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="today-meals-tbody">
+                  <!-- Dynamically injected rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Bottom Totals Summary Card -->
+          <div class="card" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-top: 4px solid var(--primary);">
+            <h3 class="card-title" style="margin-bottom: 1.25rem;">
+              <i class="fa-solid fa-calculator" style="color: var(--primary); margin-right: 0.5rem;"></i>
+              Today's Nutrition Totals
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;">
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--calorie-color); text-transform: uppercase;">Total Calories</div>
+                <div id="total-today-cal" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">0 kcal</div>
+              </div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--protein-color); text-transform: uppercase;">Total Protein</div>
+                <div id="total-today-prot" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">0 g</div>
+              </div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--carb-color); text-transform: uppercase;">Total Carbohydrates</div>
+                <div id="total-today-carb" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">0 g</div>
+              </div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--fat-color); text-transform: uppercase;">Total Fat</div>
+                <div id="total-today-fat" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">0 g</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Edit Meal Modal -->
+  <div id="edit-meal-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Food Record</h3>
+        <button class="modal-close" id="close-edit-modal-btn">&times;</button>
+      </div>
+      <form id="edit-meal-form">
+        <input type="hidden" id="edit_food_id">
+
+        <div class="form-group">
+          <label for="edit_food_name" class="form-label">Food Name *</label>
+          <input type="text" id="edit_food_name" class="form-control" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit_meal_type" class="form-label">Meal Type *</label>
+            <select id="edit_meal_type" class="form-control" required>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Snack">Snack</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="edit_quantity" class="form-label">Quantity</label>
+            <input type="text" id="edit_quantity" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="edit_calories" class="form-label">Calories (kcal) *</label>
+          <input type="number" id="edit_calories" step="0.1" class="form-control" required min="0">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="edit_protein" class="form-label">Protein (g)</label>
+            <input type="number" id="edit_protein" step="0.1" class="form-control" min="0">
+          </div>
+          <div class="form-group">
+            <label for="edit_carbohydrates" class="form-label">Carbs (g)</label>
+            <input type="number" id="edit_carbohydrates" step="0.1" class="form-control" min="0">
+          </div>
+          <div class="form-group">
+            <label for="edit_fat" class="form-label">Fat (g)</label>
+            <input type="number" id="edit_fat" step="0.1" class="form-control" min="0">
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="cancel-edit-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="save-edit-meal-btn">
+            <i class="fa-solid fa-check"></i> Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="color: var(--danger);">
+          <i class="fa-solid fa-triangle-exclamation"></i> Delete Food Record
+        </h3>
+        <button class="modal-close" id="close-delete-modal-btn">&times;</button>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        Are you sure you want to delete <strong id="delete-food-name-target" style="color: var(--text-main);">this item</strong>? This action cannot be undone.
+      </p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" id="cancel-delete-btn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirm-delete-btn">
+          <i class="fa-solid fa-trash-can"></i> Yes, Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/food.js"></script>
+</body>
+</html>

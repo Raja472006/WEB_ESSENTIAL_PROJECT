@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriTrack – Food & Nutrition Tracker | Healthy Living Made Simple</title>
+  <meta name="description" content="NutriTrack empowers you to monitor calories, protein, carbohydrates, fats, and water intake in one clean, responsive dashboard.">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* Landing page specific styling */
+    .hero-section {
+      padding: 5rem 2rem 4rem 2rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary-light);
+      color: var(--primary-hover);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--text-main);
+      max-width: 820px;
+      margin: 0 auto 1.25rem auto;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--primary) 0%, #0284c7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-preview {
+      margin: 3.5rem auto 0 auto;
+      max-width: 980px;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      padding: 1.5rem;
+    }
+
+    .section-container {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-subtitle {
+      color: var(--primary);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .feature-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .step-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .about-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+      border: 1px solid #bbf7d0;
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+    }
+
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      padding: 4rem 2rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid #334155;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Navbar -->
+  <nav class="landing-navbar">
+    <a href="index.html" class="brand-logo">
+      <i class="fa-solid fa-leaf"></i>
+      <span>NutriTrack</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#features" class="nav-link">Features</a></li>
+      <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+      <li><a href="#about" class="nav-link">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-outline" id="landing-login-btn">Login</a>
+      <a href="register.html" class="btn btn-primary" id="landing-register-btn">Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-badge">
+      <i class="fa-solid fa-bolt"></i> Modern Web Essentials Project
+    </div>
+    <h1 class="hero-title">
+      Track Your Food. <br>
+      <span>Understand Your Nutrition.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Monitor calories, protein, carbohydrates, fats and water intake in one simple, intelligent dashboard.
+    </p>
+    <div class="hero-cta">
+      <a href="register.html" class="btn btn-primary btn-lg" id="hero-get-started-btn">
+        <i class="fa-solid fa-arrow-right"></i> Get Started
+      </a>
+      <a href="login.html" class="btn btn-outline btn-lg" id="hero-login-btn">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </a>
+    </div>
+
+    <!-- Live Preview Card / Mock Visual -->
+    <div class="hero-preview">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+          <strong style="margin-left: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">NutriTrack Dashboard</strong>
+        </div>
+        <span class="badge badge-success"><i class="fa-solid fa-shield-halved"></i> JWT Authenticated</span>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; text-align: left;">
+        <div style="background: #fffbeb; padding: 1.25rem; border-radius: 12px; border: 1px solid #fef3c7;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #b45309; text-transform: uppercase;">CALORIES</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #78350f;">1,450 / 2,000 <span style="font-size: 0.8rem;">kcal</span></div>
+          <div style="height: 6px; background: #fde68a; border-radius: 99px; margin-top: 0.5rem; overflow: hidden;">
+            <div style="width: 72%; height: 100%; background: #f59e0b;"></div>
+          </div>
+        </div>
+        <div style="background: #eff6ff; padding: 1.25rem; border-radius: 12px; border: 1px solid #dbeafe;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #1d4ed8; text-transform: uppercase;">PROTEIN</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #1e3a8a;">70 / 100 <span style="font-size: 0.8rem;">g</span></div>
+          <div style="height: 6px; background: #bfdbfe; border-radius: 99px; margin-top: 0.5rem; overflow: hidden;">
+            <div style="width: 70%; height: 100%; background: #3b82f6;"></div>
+          </div>
+        </div>
+        <div style="background: #ecfdf5; padding: 1.25rem; border-radius: 12px; border: 1px solid #a7f3d0;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #047857; text-transform: uppercase;">CARBS</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #064e3b;">180 / 250 <span style="font-size: 0.8rem;">g</span></div>
+          <div style="height: 6px; background: #6ee7b7; border-radius: 99px; margin-top: 0.5rem; overflow: hidden;">
+            <div style="width: 72%; height: 100%; background: #10b981;"></div>
+          </div>
+        </div>
+        <div style="background: #fdf2f8; padding: 1.25rem; border-radius: 12px; border: 1px solid #fbcfe8;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #be185d; text-transform: uppercase;">FAT</div>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #831843;">45 / 70 <span style="font-size: 0.8rem;">g</span></div>
+          <div style="height: 6px; background: #f472b6; border-radius: 99px; margin-top: 0.5rem; overflow: hidden;">
+            <div style="width: 64%; height: 100%; background: #ec4899;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section-container" id="features">
+    <div class="section-header">
+      <div class="section-subtitle">Features</div>
+      <h2 class="section-title">Everything You Need for Daily Nutrition</h2>
+    </div>
+
+    <div class="features-grid">
+      <!-- 1. Calorie Tracking -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: var(--calorie-light); color: var(--calorie-color);">
+          <i class="fa-solid fa-fire"></i>
+        </div>
+        <h3 style="font-size: 1.25rem;">Calorie Tracking</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Log daily meals across Breakfast, Lunch, Dinner, and Snacks. Watch real-time calorie budgets update with instant progress indicators.
+        </p>
+      </div>
+
+      <!-- 2. Nutrition Monitoring -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: var(--protein-light); color: var(--protein-color);">
+          <i class="fa-solid fa-dna"></i>
+        </div>
+        <h3 style="font-size: 1.25rem;">Macronutrient Monitoring</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Track protein, carbohydrates, and fats in grams and percentages to balance muscle repair, energy levels, and healthy cellular function.
+        </p>
+      </div>
+
+      <!-- 3. Food History -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: var(--carb-light); color: var(--carb-color);">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <h3 style="font-size: 1.25rem;">Food History</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Browse your daily, weekly, or 30-day nutrition history. Inspect meal breakdowns and analyze long-term nutritional patterns.
+        </p>
+      </div>
+
+      <!-- 4. Personal Goals -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: var(--secondary-light); color: var(--secondary);">
+          <i class="fa-solid fa-bullseye"></i>
+        </div>
+        <h3 style="font-size: 1.25rem;">Personal Goals</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Customize target calories, macronutrient targets, and daily water goals tailored to your individual health journey.
+        </p>
+      </div>
+
+      <!-- 5. Water Tracking -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: var(--water-light); color: var(--water-color);">
+          <i class="fa-solid fa-droplet"></i>
+        </div>
+        <h3 style="font-size: 1.25rem;">Water Tracking</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Interactive visual water glass counter with one-click increment and decrement controls to keep your body properly hydrated.
+        </p>
+      </div>
+
+      <!-- 6. Nutrition Charts -->
+      <div class="feature-card">
+        <div class="feature-icon-box" style="background: var(--fat-light); color: var(--fat-color);">
+          <i class="fa-solid fa-chart-pie"></i>
+        </div>
+        <h3 style="font-size: 1.25rem;">Interactive Nutrition Charts</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Powered by Chart.js. Visualize daily macronutrient ratios and weekly calorie curves rendered directly from database queries.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section-container" id="how-it-works" style="background-color: #ffffff; border-radius: var(--radius-lg); margin-bottom: 4rem;">
+    <div class="section-header">
+      <div class="section-subtitle">Workflow</div>
+      <h2 class="section-title">How It Works</h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h4 style="margin-bottom: 0.5rem;">Create Account</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Register with your height, weight, and credentials to establish your profile.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h4 style="margin-bottom: 0.5rem;">Set Goals</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Define target calories, protein, carbs, fat, and daily water intake glasses.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h4 style="margin-bottom: 0.5rem;">Add Food</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Select from curated preset Indian & global foods or enter custom meals.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h4 style="margin-bottom: 0.5rem;">Track Nutrition</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">View real-time progress bars, doughnut charts, and today's meal summaries.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <h4 style="margin-bottom: 0.5rem;">Improve Habits</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Review weekly trends and calculated BMI metrics to sustain healthier eating habits.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section-container" id="about">
+    <div class="about-box">
+      <div class="section-subtitle">Academic Project Overview</div>
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">NutriTrack – Web Essentials Project</h2>
+      <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">
+        NutriTrack is an academic full-stack web application engineered for the college <strong>Web Essentials</strong> mini-project. 
+        It integrates modern responsive frontend engineering with a RESTful Express.js backend, relational database persistence, 
+        salted bcrypt password hashing, stateless JWT authorization, and dynamic Chart.js visualizations.
+      </p>
+      <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+        <div>
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">100%</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Real Database CRUD</div>
+        </div>
+        <div>
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">22+</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Catalog Food Presets</div>
+        </div>
+        <div>
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">REST API</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Protected Endpoints</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="brand-logo" style="color: #ffffff; margin-bottom: 1rem;">
+          <i class="fa-solid fa-leaf" style="color: var(--primary);"></i>
+          <span>NutriTrack</span>
+        </div>
+        <p style="font-size: 0.9rem; line-height: 1.7; max-width: 420px;">
+          NutriTrack – Food & Nutrition Tracker. Designed to make nutritional tracking intuitive, precise, and visually rewarding.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color: #ffffff; margin-bottom: 1rem; font-size: 1rem;">Navigation</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+          <li><a href="#home" style="color: #94a3b8;">Home</a></li>
+          <li><a href="#features" style="color: #94a3b8;">Features</a></li>
+          <li><a href="#how-it-works" style="color: #94a3b8;">How It Works</a></li>
+          <li><a href="#about" style="color: #94a3b8;">About</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color: #ffffff; margin-bottom: 1rem; font-size: 1rem;">Get Started</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+          <li><a href="login.html" style="color: #94a3b8;">Login</a></li>
+          <li><a href="register.html" style="color: #94a3b8;">Create Account</a></li>
+          <li><a href="dashboard.html" style="color: #94a3b8;">Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 NutriTrack. Web Essentials College Mini Project. All rights reserved.</div>
+      <div>Designed with HTML5, CSS3, JavaScript, Node.js & MySQL.</div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+</body>
+</html>

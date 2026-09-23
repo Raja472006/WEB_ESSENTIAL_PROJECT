@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account – NutriTrack</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-card wide">
+      <div class="auth-header">
+        <a href="index.html" class="auth-logo">
+          <i class="fa-solid fa-leaf"></i>
+          <span>NutriTrack</span>
+        </a>
+        <h1 class="auth-title">Create Your Account</h1>
+        <p class="auth-subtitle">Join NutriTrack to start monitoring your daily nutrition and fitness goals.</p>
+      </div>
+
+      <!-- Alert Box -->
+      <div id="auth-alert" class="auth-alert"></div>
+
+      <form id="register-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="full_name" class="form-label">Full Name *</label>
+            <input type="text" id="full_name" class="form-control" placeholder="e.g. John Doe" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password" class="form-label">Password * (min 8 chars)</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="password" class="form-control" placeholder="Create strong password" minlength="8" required>
+              <button type="button" class="password-toggle-btn" data-target="password" title="Toggle password visibility">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm_password" class="form-label">Confirm Password *</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="confirm_password" class="form-control" placeholder="Confirm your password" minlength="8" required>
+              <button type="button" class="password-toggle-btn" data-target="confirm_password" title="Toggle password visibility">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="age" class="form-label">Age (years)</label>
+            <input type="number" id="age" class="form-control" placeholder="e.g. 24" min="5" max="120">
+          </div>
+
+          <div class="form-group">
+            <label for="gender" class="form-label">Gender</label>
+            <select id="gender" class="form-control">
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="height" class="form-label">Height (cm)</label>
+            <input type="number" id="height" step="0.1" class="form-control" placeholder="e.g. 175" min="50" max="250">
+          </div>
+
+          <div class="form-group">
+            <label for="weight" class="form-label">Weight (kg)</label>
+            <input type="number" id="weight" step="0.1" class="form-control" placeholder="e.g. 70" min="20" max="300">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="register-submit-btn">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="login.html">Sign in here</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

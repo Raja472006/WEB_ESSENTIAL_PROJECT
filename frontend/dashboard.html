@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – NutriTrack</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <i class="fa-solid fa-leaf"></i>
+          <span>NutriTrack</span>
+        </a>
+        <button class="sidebar-close-btn" aria-label="Close Sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link" id="nav-dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="add-food.html" class="sidebar-link" id="nav-add-food">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span>Add Food</span>
+        </a>
+        <a href="today.html" class="sidebar-link" id="nav-today">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Today's Meals</span>
+        </a>
+        <a href="history.html" class="sidebar-link" id="nav-history">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>History</span>
+        </a>
+
+        <div class="nav-category">Wellness & Targets</div>
+        <a href="goals.html" class="sidebar-link" id="nav-goals">
+          <i class="fa-solid fa-bullseye"></i>
+          <span>Nutrition Goals</span>
+        </a>
+        <a href="water.html" class="sidebar-link" id="nav-water">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Water Tracker</span>
+        </a>
+        <a href="profile.html" class="sidebar-link" id="nav-profile">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Profile & BMI</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">U</div>
+          <div class="user-meta">
+            <div class="user-meta-name user-name-display">Loading...</div>
+            <div class="user-meta-email user-email-display">user@example.com</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm logout-btn" id="sidebar-logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-toggle" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-title">Dashboard Overview</div>
+        </div>
+        <div class="topbar-right">
+          <div class="date-pill">
+            <i class="fa-regular fa-calendar" style="color: var(--primary);"></i>
+            <span id="dashboard-date-display">Today</span>
+          </div>
+          <a href="add-food.html" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-plus"></i> Add Food
+          </a>
+        </div>
+      </header>
+
+      <!-- Content Container -->
+      <main class="content-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div class="page-greeting">
+            <h1>Welcome, <span id="user-greeting-name">Explorer</span>!</h1>
+            <p>Here is your daily nutritional breakdown and progress towards your goals.</p>
+          </div>
+          <div>
+            <a href="today.html" class="btn btn-outline btn-sm">
+              <i class="fa-solid fa-list-check"></i> View Today's Log
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Nutrition Main Cards -->
+        <div class="nutrition-grid">
+          <!-- CALORIES -->
+          <div class="stat-card calories">
+            <div class="stat-header">
+              <span class="stat-title">Calories</span>
+              <div class="stat-icon"><i class="fa-solid fa-fire"></i></div>
+            </div>
+            <div class="stat-values">
+              <div class="stat-primary" id="cal-consumed">0 / 2,000 kcal</div>
+              <div class="stat-target" id="cal-goal">Goal: 2,000 kcal</div>
+            </div>
+            <div class="stat-progress-container">
+              <div class="stat-progress-bar" id="cal-bar" style="width: 0%;"></div>
+            </div>
+            <div class="stat-footer">
+              <span>Daily Target</span>
+              <span class="stat-percentage" id="cal-pct">0%</span>
+            </div>
+          </div>
+
+          <!-- PROTEIN -->
+          <div class="stat-card protein">
+            <div class="stat-header">
+              <span class="stat-title">Protein</span>
+              <div class="stat-icon"><i class="fa-solid fa-dna"></i></div>
+            </div>
+            <div class="stat-values">
+              <div class="stat-primary" id="protein-consumed">0 / 100 g</div>
+              <div class="stat-target" id="protein-goal">Goal: 100 g</div>
+            </div>
+            <div class="stat-progress-container">
+              <div class="stat-progress-bar" id="protein-bar" style="width: 0%;"></div>
+            </div>
+            <div class="stat-footer">
+              <span>Muscle Recovery</span>
+              <span class="stat-percentage" id="protein-pct">0%</span>
+            </div>
+          </div>
+
+          <!-- CARBOHYDRATES -->
+          <div class="stat-card carbs">
+            <div class="stat-header">
+              <span class="stat-title">Carbohydrates</span>
+              <div class="stat-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+            </div>
+            <div class="stat-values">
+              <div class="stat-primary" id="carbs-consumed">0 / 250 g</div>
+              <div class="stat-target" id="carbs-goal">Goal: 250 g</div>
+            </div>
+            <div class="stat-progress-container">
+              <div class="stat-progress-bar" id="carbs-bar" style="width: 0%;"></div>
+            </div>
+            <div class="stat-footer">
+              <span>Energy Intake</span>
+              <span class="stat-percentage" id="carbs-pct">0%</span>
+            </div>
+          </div>
+
+          <!-- FAT -->
+          <div class="stat-card fat">
+            <div class="stat-header">
+              <span class="stat-title">Fat</span>
+              <div class="stat-icon"><i class="fa-solid fa-bacon"></i></div>
+            </div>
+            <div class="stat-values">
+              <div class="stat-primary" id="fat-consumed">0 / 70 g</div>
+              <div class="stat-target" id="fat-goal">Goal: 70 g</div>
+            </div>
+            <div class="stat-progress-container">
+              <div class="stat-progress-bar" id="fat-bar" style="width: 0%;"></div>
+            </div>
+            <div class="stat-footer">
+              <span>Healthy Fats</span>
+              <span class="stat-percentage" id="fat-pct">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State Banner (Shown when no food logged today) -->
+        <div id="today-empty-banner" class="card" style="display: none; margin-bottom: 2rem; border-left: 4px solid var(--primary); background: #f0fdf4;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="width: 44px; height: 44px; border-radius: 50%; background: #dcfce7; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; margin-bottom: 0.15rem;">No food logged today</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Start logging your meals to watch your nutrition graphs update in real time.</p>
+              </div>
+            </div>
+            <a href="add-food.html" class="btn btn-primary btn-sm">
+              <i class="fa-solid fa-plus"></i> Log First Meal
+            </a>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+          <!-- Chart 1: Daily Macronutrients Doughnut -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Daily Macronutrients</h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Protein vs Carbs vs Fat</p>
+              </div>
+              <span class="badge badge-info"><i class="fa-solid fa-chart-pie"></i> Ratio</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="macroChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: Weekly Calories Bar Chart -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Weekly Calories</h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Mon – Sun Consumption (kcal)</p>
+              </div>
+              <span class="badge badge-success"><i class="fa-solid fa-chart-simple"></i> Weekly</span>
+            </div>
+            <div class="chart-container">
+              <canvas id="weeklyChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Grid: Water Summary & Today's Recent Logs -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+          <!-- Water Quick Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Today's Hydration</h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Daily Water Consumption</p>
+              </div>
+              <a href="water.html" class="btn btn-outline btn-sm">Manage</a>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0;">
+              <div>
+                <div class="stat-primary" id="water-consumed" style="color: var(--water-color);">0 / 8 glasses</div>
+                <div class="stat-target" id="water-goal">Target: 8 glasses (approx. 2 Liters)</div>
+              </div>
+              <div style="font-size: 2.2rem; color: var(--water-color);">
+                <i class="fa-solid fa-bottle-water"></i>
+              </div>
+            </div>
+            <div class="stat-progress-container" style="margin-top: 1rem;">
+              <div class="stat-progress-bar" id="water-bar" style="background: var(--water-color); width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Today's Recent Log Activity -->
+          <div class="card" id="recent-activity-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Today's Logged Meals</h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted);">Most recent food entries</p>
+              </div>
+              <a href="today.html" class="btn btn-outline btn-sm">View All</a>
+            </div>
+            <div id="recent-logs-list">
+              <!-- Dynamically populated by dashboard.js -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Application Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

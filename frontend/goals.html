@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrition Goals – NutriTrack</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <i class="fa-solid fa-leaf"></i>
+          <span>NutriTrack</span>
+        </a>
+        <button class="sidebar-close-btn" aria-label="Close Sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link" id="nav-dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="add-food.html" class="sidebar-link" id="nav-add-food">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span>Add Food</span>
+        </a>
+        <a href="today.html" class="sidebar-link" id="nav-today">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Today's Meals</span>
+        </a>
+        <a href="history.html" class="sidebar-link" id="nav-history">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>History</span>
+        </a>
+
+        <div class="nav-category">Wellness & Targets</div>
+        <a href="goals.html" class="sidebar-link" id="nav-goals">
+          <i class="fa-solid fa-bullseye"></i>
+          <span>Nutrition Goals</span>
+        </a>
+        <a href="water.html" class="sidebar-link" id="nav-water">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Water Tracker</span>
+        </a>
+        <a href="profile.html" class="sidebar-link" id="nav-profile">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Profile & BMI</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">U</div>
+          <div class="user-meta">
+            <div class="user-meta-name user-name-display">Loading...</div>
+            <div class="user-meta-email user-email-display">user@example.com</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-toggle" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-title">Nutrition Goals</div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn btn-outline btn-sm" id="reset-recommended-goals-btn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Load Recommended Preset
+          </button>
+        </div>
+      </header>
+
+      <main class="content-container">
+        <div class="page-header">
+          <div class="page-greeting">
+            <h1>Set Daily Nutrition & Hydration Goals</h1>
+            <p>Customize your personal daily targets. Dashboard calculations adapt immediately.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+          <!-- Goals Form -->
+          <div class="card">
+            <form id="goals-form">
+              <div class="form-group">
+                <label for="calorie_goal" class="form-label">
+                  <i class="fa-solid fa-fire" style="color: var(--calorie-color);"></i> Daily Calories Target (kcal) *
+                </label>
+                <input type="number" id="calorie_goal" class="form-control" required min="500" max="10000" step="10">
+                <small style="color: var(--text-muted); font-size: 0.8rem;">Standard adult guideline is roughly 1800 – 2500 kcal depending on activity.</small>
+              </div>
+
+              <div class="form-row" style="margin-top: 1.25rem;">
+                <div class="form-group">
+                  <label for="protein_goal" class="form-label" style="color: var(--protein-color);">
+                    <i class="fa-solid fa-dna"></i> Daily Protein (g) *
+                  </label>
+                  <input type="number" id="protein_goal" class="form-control" required min="10" max="500" step="1">
+                </div>
+
+                <div class="form-group">
+                  <label for="carbohydrate_goal" class="form-label" style="color: var(--carb-color);">
+                    <i class="fa-solid fa-wheat-awn"></i> Daily Carbs (g) *
+                  </label>
+                  <input type="number" id="carbohydrate_goal" class="form-control" required min="10" max="800" step="1">
+                </div>
+
+                <div class="form-group">
+                  <label for="fat_goal" class="form-label" style="color: var(--fat-color);">
+                    <i class="fa-solid fa-bacon"></i> Daily Fat (g) *
+                  </label>
+                  <input type="number" id="fat_goal" class="form-control" required min="5" max="300" step="1">
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 1.25rem;">
+                <label for="water_goal" class="form-label" style="color: var(--water-color);">
+                  <i class="fa-solid fa-bottle-water"></i> Daily Water Intake (glasses) *
+                </label>
+                <input type="number" id="water_goal" class="form-control" required min="1" max="30" step="1">
+                <small style="color: var(--text-muted); font-size: 0.8rem;">1 standard glass is approximately 250 ml (8 glasses = 2 Liters).</small>
+              </div>
+
+              <div style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;" id="save-goals-btn">
+                  <i class="fa-solid fa-floppy-disk"></i> Save Nutrition Goals
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Macro Ratio Helper & Summary -->
+          <div>
+            <div class="card" style="border-top: 4px solid var(--secondary);">
+              <h3 class="card-title" style="font-size: 1.05rem; margin-bottom: 0.5rem;">Macro Calorie Ratio</h3>
+              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem;">Live balance based on your entered grams</p>
+
+              <!-- Combined Ratio Bar -->
+              <div style="display: flex; height: 14px; border-radius: var(--radius-full); overflow: hidden; margin-bottom: 0.75rem;">
+                <div id="preview-bar-p" style="background: var(--protein-color); width: 20%;" title="Protein"></div>
+                <div id="preview-bar-c" style="background: var(--carb-color); width: 50%;" title="Carbs"></div>
+                <div id="preview-bar-f" style="background: var(--fat-color); width: 30%;" title="Fat"></div>
+              </div>
+
+              <div id="macro-summary-text" style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+                Protein: 20% • Carbs: 50% • Fat: 30%
+              </div>
+
+              <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.82rem;">
+                <strong style="color: var(--text-main); display: block; margin-bottom: 0.4rem;">Caloric Equivalents:</strong>
+                <div>• 1g Protein = 4 kcal</div>
+                <div>• 1g Carbohydrates = 4 kcal</div>
+                <div>• 1g Dietary Fat = 9 kcal</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/goals.js"></script>
+</body>
+</html>

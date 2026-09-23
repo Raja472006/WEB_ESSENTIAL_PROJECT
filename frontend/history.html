@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food History – NutriTrack</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="sidebar-overlay"></div>
+
+  <div class="app-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <i class="fa-solid fa-leaf"></i>
+          <span>NutriTrack</span>
+        </a>
+        <button class="sidebar-close-btn" aria-label="Close Sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="sidebar-link" id="nav-dashboard">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="add-food.html" class="sidebar-link" id="nav-add-food">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span>Add Food</span>
+        </a>
+        <a href="today.html" class="sidebar-link" id="nav-today">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Today's Meals</span>
+        </a>
+        <a href="history.html" class="sidebar-link" id="nav-history">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>History</span>
+        </a>
+
+        <div class="nav-category">Wellness & Targets</div>
+        <a href="goals.html" class="sidebar-link" id="nav-goals">
+          <i class="fa-solid fa-bullseye"></i>
+          <span>Nutrition Goals</span>
+        </a>
+        <a href="water.html" class="sidebar-link" id="nav-water">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Water Tracker</span>
+        </a>
+        <a href="profile.html" class="sidebar-link" id="nav-profile">
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Profile & BMI</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">U</div>
+          <div class="user-meta">
+            <div class="user-meta-name user-name-display">Loading...</div>
+            <div class="user-meta-email user-email-display">user@example.com</div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm logout-btn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-toggle" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-title">Historical Trends</div>
+        </div>
+        <div class="topbar-right">
+          <a href="add-food.html" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-plus"></i> Log Meal
+          </a>
+        </div>
+      </header>
+
+      <main class="content-container">
+        <div class="page-header">
+          <div class="page-greeting">
+            <h1>Food & Nutrition History</h1>
+            <p>Analyze your nutritional progress across days, weeks, and custom date ranges.</p>
+          </div>
+
+          <!-- Period Filter Pills -->
+          <div class="filter-pill-bar">
+            <button class="filter-pill" data-period="today">Today</button>
+            <button class="filter-pill active" data-period="7days">Last 7 Days</button>
+            <button class="filter-pill" data-period="30days">Last 30 Days</button>
+            <button class="filter-pill" data-period="custom">Custom Date</button>
+          </div>
+        </div>
+
+        <!-- Custom Date Range Bar (hidden by default) -->
+        <div id="custom-date-box" class="card" style="display: none; margin-bottom: 1.5rem; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <div class="form-group" style="margin: 0; min-width: 160px;">
+            <label for="start-date-input" class="form-label" style="font-size: 0.8rem;">Start Date</label>
+            <input type="date" id="start-date-input" class="form-control" style="padding: 0.4rem 0.6rem;">
+          </div>
+          <div class="form-group" style="margin: 0; min-width: 160px;">
+            <label for="end-date-input" class="form-label" style="font-size: 0.8rem;">End Date</label>
+            <input type="date" id="end-date-input" class="form-control" style="padding: 0.4rem 0.6rem;">
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" id="apply-custom-date-btn" style="align-self: flex-end; height: 38px;">
+            <i class="fa-solid fa-filter"></i> Apply Filter
+          </button>
+        </div>
+
+        <!-- Trend Line Chart -->
+        <div class="card" id="history-chart-card" style="min-height: 380px; margin-bottom: 2rem;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Nutrition Trends Over Selected Period</h3>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Calories and macronutrients per day</p>
+            </div>
+            <span class="badge badge-info"><i class="fa-solid fa-chart-line"></i> Timeline</span>
+          </div>
+          <div class="chart-container" style="min-height: 300px;">
+            <canvas id="historyChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="history-empty-state" class="card empty-state" style="display: none;">
+          <div class="empty-state-icon">
+            <i class="fa-solid fa-calendar-xmark"></i>
+          </div>
+          <h3 class="empty-state-title">No history found for this period</h3>
+          <p class="empty-state-desc">There are no food entries logged during the selected dates. Try another filter or log meals.</p>
+        </div>
+
+        <!-- History Summary Table -->
+        <div id="history-table-wrapper" class="card" style="padding: 0; overflow: hidden;">
+          <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <h3 class="card-title">Daily Nutrition Aggregates</h3>
+            <span class="badge badge-secondary">Aggregated by Date</span>
+          </div>
+          <div class="table-responsive">
+            <table class="custom-table" id="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Items Logged</th>
+                  <th>Total Calories</th>
+                  <th>Protein</th>
+                  <th>Carbohydrates</th>
+                  <th>Fat</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>
